@@ -1,5 +1,6 @@
-## Hi there 👋
+## Hi I'm Ofek
 
+I am a software developer focused on backend systems, automation scripts, and algorithmic efficiency. I build tools that interface with APIs to track data and automate real-world workflows.
 <!--
 **Ofek-Commits/Ofek-Commits** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
