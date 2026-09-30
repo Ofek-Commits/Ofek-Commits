@@ -2,7 +2,7 @@
   "name": "one-tile-village",
   "version": "1.0.0",
   "private": true,
-  "description": "A cozy isometric farming-village game. Start with one tile, grow it for 1000 days.",
+  "description": "A fantasy-medieval village builder. Start with one tile, raise your own house, grow a realm for 1000 days.",
   "scripts": {
     "sync": "cap sync",
     "android": "cap sync android && cap open android",
