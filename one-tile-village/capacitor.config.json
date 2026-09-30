@@ -1,0 +1,8 @@
+{
+  "appId": "com.ofek.onetilevillage",
+  "appName": "One Tile Kingdom",
+  "webDir": "www",
+  "backgroundColor": "#0d0e14",
+  "android": { "allowMixedContent": false },
+  "ios": { "contentInset": "never" }
+}
