@@ -1,6 +1,6 @@
 # One Tile Kingdom
 
-A fantasy-medieval village builder that runs in the browser. It is based on the "0 days to 1000 days" idea: you start with a single grass block and one crowned, hooded lord or lady, raise your own house, and grow it into a kingdom over 1000 in-game days.
+A fantasy-medieval village builder that runs in the browser. It starts with a single grass block and one crowned, hooded lord or lady. You raise your own house and grow it, step by step, into a kingdom.
 
 The game itself is one file (`www/index.html`) with no build step and no image assets. All the pixel art is drawn from code at startup, and the two pixel fonts are bundled in `www/fonts`, so it works offline.
 
@@ -38,15 +38,17 @@ Note: I could not compile the Android or iOS builds in the sandbox where this wa
 
 - **Your home** is free and you get one. Pick the Home tool and click your grass. Click the house later to name your village, choose your house colours and upgrade it: Cottage, Manor, Keep, then Castle. Each level adds charm and a retainer. The Keep and Castle add knights.
 - **Your village** starts as a Hamlet and grows into a Village, Town, City and finally a Kingdom as you claim land. Its name and rank show in the top left.
-- **Land** extends your island one tile at a time. Each tile costs a little more than the last.
-- **Wheat** ripens in 4 days. Click ripe wheat to harvest it, or let villagers do it. Villagers replant for 1 coin.
+- **Land** extends your island one tile at a time. Early tiles cost just a few coins, and the price rises gently as you grow.
+- **Upgrades** (button at the top, or `U`) are a tree of permanent boosts for Farming, Trade and your Realm: faster wheat, free seeds, better prices, cheaper land, more charm and more.
+- **Decrees** are royal goals that pay coins when you fulfil them, from "Raise your home" up to "Rule a Kingdom". The next one shows in the top left.
+- **Wheat** ripens after a short wait. Click ripe wheat to harvest it, or let villagers do it. Villagers replant for 1 coin.
 - **Selling:** use the Sell all button (70% price), or click a **Shop**, **Stall**, **Tavern** or **Cart** for full price. Those buildings also sell automatically every morning.
 - **Windmill** grinds wheat into flour, which sells for much more.
 - **Cottage** brings a peasant family who harvest for you. **Well** speeds up nearby wheat.
 - **Smithy** adds wheat to every harvest (up to +2). **Chapel** (needs a Manor) adds a lot of charm. **Wizard tower** (needs a Keep) speeds up wheat within 3 tiles by 75%.
 - **Charm** from trees, paths and buildings raises every sale price, up to double.
-- Seasons change every 30 days, there is a day and night cycle, and a dragon sometimes flies over. Click it for a treasure.
-- Reach day 1000 to finish. You can keep playing afterwards.
+- Seasons change, there is a day and night cycle, and a dragon sometimes flies over. Click it for a treasure.
+- Fulfil the last decree, to rule a Kingdom, for a celebration. You can keep playing afterwards.
 
 ## Controls
 
@@ -58,9 +60,10 @@ Note: I could not compile the Android or iOS builds in the sandbox where this wa
 | `W A S D` / arrow keys | Move the camera |
 | `1`-`9`, `0`, `H`, `C`, `T`, `B`, `V`, `G`, `X` | Pick a tool (Home, Cart, Tavern, smithy (B), chapel (V), wizard (G), Clear) |
 | `Space` | Pause |
+| `U` | Open upgrades |
 | `M` | Mute |
 
-The 1x / 3x / 10x buttons change game speed. A full 1000 days takes about 10 minutes at 10x.
+The 1x / 3x / 10x buttons change game speed.
 
 ## Developer handle
 

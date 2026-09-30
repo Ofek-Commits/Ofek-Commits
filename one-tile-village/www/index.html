@@ -65,11 +65,6 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outl
 #hud-top > * { pointer-events: auto; }
 #day-card { padding: 10px 14px 10px; display: flex; flex-direction: column; gap: 6px; min-width: 176px; }
 .big { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; }
-#day-num {
-  font-size: 34px; line-height: 1; color: #fff; font-variant-numeric: tabular-nums;
-  text-shadow: -3px 0 #07080c, 3px 0 #07080c, 0 -3px #07080c, 0 3px #07080c, -3px -3px #07080c, 3px 3px #07080c, -3px 3px #07080c, 3px -3px #07080c;
-  min-width: 1ch;
-}
 .unit {
   font-size: 17px; background: var(--gold); color: var(--gold-ink); padding: 3px 8px 4px; border-radius: 4px;
   box-shadow: 0 3px 0 var(--gold-deep); letter-spacing: 0.04em;
@@ -79,7 +74,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outl
 .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--leaf), var(--gold)); }
 #season-line { font-size: 14px; display: flex; align-items: center; gap: 8px; }
 #clock-dot { width: 10px; height: 10px; border-radius: 2px; background: var(--gold); box-shadow: 0 0 0 2px #0d0e16; }
-#next-goal { font-size: 13px; color: var(--dim); max-width: 210px; line-height: 1.25; }
+#next-goal { font-size: 13px; color: var(--dim); max-width: 250px; line-height: 1.3; }
 #next-goal b { color: var(--text); font-weight: 600; }
 
 #hud-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; min-width: 0; max-width: 100%; }
@@ -186,10 +181,30 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outl
 .upgrade .req { display: flex; justify-content: space-between; gap: 10px; font-variant-numeric: tabular-nums; }
 .req.ok b { color: var(--leaf); font-weight: 600; } .req.no b { color: var(--bad); font-weight: 600; }
 .btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+
+.village-btn { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-family: var(--font-display); font-weight: 700; }
+.vname { font-size: 22px; line-height: 1.1; color: #fff; text-shadow: -2px 0 #07080c, 2px 0 #07080c, 0 -2px #07080c, 0 2px #07080c, -2px -2px #07080c, 2px 2px #07080c, -2px 2px #07080c, 2px -2px #07080c; }
+.village-btn:hover .vname { color: var(--gold); }
+.village-btn .unit { font-size: 13px; padding: 2px 7px 3px; }
+.badge { display: inline-block; min-width: 18px; padding: 0 5px; border-radius: 9px; background: var(--leaf); color: #10240a; font-size: 12px; line-height: 18px; text-align: center; font-weight: 700; }
+.card.wide { width: min(780px, 100%); }
+.up-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+#up-grid { display: flex; flex-direction: column; gap: 14px; }
+.upbranch { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: 0.06em; color: var(--gold); margin: 0 0 6px; text-transform: uppercase; }
+.upcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+.upc { text-align: left; display: flex; flex-direction: column; gap: 4px; padding: 8px 10px; background: var(--panel-2); border: 2px solid var(--line); border-radius: 8px; box-shadow: 0 3px 0 rgba(0, 0, 0, 0.4); min-width: 0; }
+.upc:hover:not([disabled]) { border-color: var(--gold); }
+.upc b { font-size: 15px; font-weight: 600; }
+.upc .d { font-size: 13px; color: var(--dim); line-height: 1.3; flex: 1; }
+.upc .f { font-size: 13px; display: flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; color: var(--gold); }
+.upc .f i { width: 8px; height: 8px; background: var(--gold); border-radius: 2px; display: inline-block; }
+.upc.owned { border-color: #3d7a35; background: #22341f; } .upc.owned .f { color: var(--leaf); } .upc.owned .f i { display: none; }
+.upc.poor .f { color: var(--bad); } .upc.poor .f i { background: var(--bad); }
+.upc.locked { opacity: 0.55; } .upc.locked .f { color: var(--dim); } .upc.locked .f i { display: none; }
 @media (max-width: 640px) {
   .hp-head { flex-wrap: wrap; }
+  .vname { font-size: 18px; }
   #day-card { min-width: 0; padding: 8px 10px; }
-  #day-num { font-size: 26px; }
   #next-goal { display: none; }
   .chip { font-size: 14px; padding: 3px 7px 3px 6px; min-height: 28px; }
   .tool { width: 66px; height: 84px; }
@@ -206,10 +221,9 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outl
 
   <div id="hud-top">
     <div id="day-card" class="panel">
-      <div class="big"><span id="day-num">0</span><span class="unit">DAYS</span></div>
-      <div class="goal-row"><div class="bar"><i id="goal-fill"></i></div><span>of 1000</span></div>
-      <div id="season-line"><span id="clock-dot"></span><span id="season">Spring, year 1</span></div>
-      <button id="village-btn" class="village-btn" type="button" title="Manage your home and village"><span id="village-rank">Hamlet</span> of <b id="village-name">Oakhollow</b></button>
+      <button id="village-btn" class="village-btn" type="button" title="Manage your home and village"><span id="village-name" class="vname">Oakhollow</span><span class="unit" id="village-rank">HAMLET</span></button>
+      <div class="goal-row"><div class="bar"><i id="goal-fill"></i></div><span id="goal-txt">0 / 21</span></div>
+      <div id="season-line"><span id="clock-dot"></span><span id="season">Spring</span></div>
       <div id="next-goal"></div>
     </div>
     <div id="hud-right">
@@ -220,8 +234,9 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outl
         <div class="chip panel" id="chip-charm" title="Charm raises every sale price"><canvas id="ic-charm" width="7" height="6"></canvas><span id="v-charm">0</span><small id="v-mult"></small></div>
       </div>
       <div class="row" id="controls">
+        <button class="btn" id="btn-up" title="Upgrades (U)">Upgrades <span id="up-badge" class="badge" hidden>0</span></button>
         <button class="btn sell" id="btn-sell" title="Sell all wheat and flour at 70% price">Sell all</button>
-        <label class="auto panel" title="Sell leftovers at 70% price every morning"><input type="checkbox" id="auto"> Auto-sell</label>
+        <label class="auto panel" id="auto-lbl" title="Sell leftovers at 70% price every morning"><input type="checkbox" id="auto"> Auto-sell</label>
         <button class="btn" id="spd-0" data-speed="0" aria-pressed="false" title="Pause (Space)">II</button>
         <button class="btn" id="spd-1" data-speed="1" aria-pressed="true" title="Normal speed">1x</button>
         <button class="btn" id="spd-3" data-speed="3" aria-pressed="false" title="Fast">3x</button>
@@ -246,13 +261,13 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outl
   <div id="intro" class="overlay">
     <div class="card panel" role="dialog" aria-labelledby="intro-title">
       <h1 id="intro-title">One Tile Kingdom</h1>
-      <div class="tagline"><span>0 days</span><span class="arrow">&rarr;</span><span class="days">1000 DAYS</span></div>
-      <p>You are the lord or lady of one small patch of land in a fantasy realm. Raise your own house, plant wheat and grow a village that lasts 1000 days. It might end as a market town, or a castle.</p>
+      <div class="tagline"><span>One tile</span><span class="arrow">&rarr;</span><span class="days">A KINGDOM</span></div>
+      <p>You are the lord or lady of one small patch of land in a fantasy realm. Raise your own house, plant wheat and grow a village, step by step. It might become a market town, or a castle with a kingdom around it.</p>
       <ul>
         <li><b>Your home</b> is free to raise. Upgrade it from Cottage to Manor, Keep and Castle, and pick your house colours.</li>
         <li><b>Land and wheat</b>: claim tiles, plant wheat, and let villagers harvest it. A windmill turns it into flour.</li>
         <li><b>The village</b>: cottages bring villagers. Shops, stalls, taverns and carts sell for you. A smithy, chapel and wizard tower add perks.</li>
-        <li><b>Charm</b> from trees, roads and buildings raises every price. Keep an eye on the sky for a dragon.</li>
+        <li><b>Upgrades and decrees</b>: spend coins on upgrades for farming, trade and your realm, and fulfil royal decrees for bonus coins. Keep an eye on the sky for a dragon.</li>
       </ul>
       <div class="keys">Drag with the Hand tool (or right-drag) to pan. Scroll to zoom. WASD moves the camera, 1&ndash;9 pick tools, Space pauses.</div>
       <div id="intro-form" class="form">
@@ -287,10 +302,18 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outl
     </div>
   </div>
 
+  <div id="up-panel" class="overlay" hidden>
+    <div class="card panel wide" role="dialog" aria-labelledby="up-title">
+      <div class="up-head"><h1 id="up-title">Upgrades</h1><span class="dim" id="up-coins"></span></div>
+      <div id="up-grid"></div>
+      <div class="actions"><button class="btn primary" id="up-close">Close</button></div>
+    </div>
+  </div>
+
   <div id="finale" class="overlay" hidden>
     <div class="card panel" role="dialog" aria-labelledby="fin-title">
-      <div class="tagline"><span>0 days</span><span class="arrow">&rarr;</span><span class="days">1000 DAYS</span></div>
-      <h1 id="fin-title">Your realm stands</h1>
+      <div class="tagline"><span>One tile</span><span class="arrow">&rarr;</span><span class="days">A KINGDOM</span></div>
+      <h1 id="fin-title">A kingdom is born</h1>
       <p id="fin-text"></p>
       <div class="stats" id="fin-stats"></div>
       <div class="actions">
@@ -311,7 +334,6 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outl
 const N = 28;                    // world is N x N tiles
 const THICK = 7;                 // block thickness in pixels
 const START = { x: 14, y: 14 };
-const GOAL_DAYS = 1000;
 const DAY_SECONDS = 6;           // real seconds per day at 1x
 const SEASON_LEN = 30;
 const GROW_DAYS = 4;
@@ -335,9 +357,9 @@ const TOOLS = [
   { id: 'hand',     name: 'Hand',     key: '1', unlock: 0,  desc: 'Harvest ripe wheat, sell at a shop, stall, tavern or cart, or click your Home to manage it. Drag to look around.' },
   { id: 'land',     name: 'Land',     key: '2', unlock: 0,  desc: 'Claim a tile next to your land. Every tile costs a little more than the last.' },
   { id: 'home',     name: 'Home',     key: 'h', unlock: 0,  cost: 0, desc: 'Raise your own house. It is free and you get one. Click it later to name your village and upgrade it.' },
-  { id: 'wheat',    name: 'Wheat',    key: '3', unlock: 0,  cost: 1,  desc: 'Plant seeds on grass. Wheat ripens in 4 days. Drag to plant a whole row.' },
+  { id: 'wheat',    name: 'Wheat',    key: '3', unlock: 0,  cost: 1,  desc: 'Plant seeds on grass. Wheat ripens after a short wait. Drag to plant a whole row.' },
   { id: 'path',     name: 'Path',     key: '4', unlock: 3,  cost: 1,  desc: 'Cobbled road. Each tile adds a touch of charm.' },
-  { id: 'tree',     name: 'Tree',     key: '5', unlock: 3,  cost: 6,  desc: 'Trees grow up over 6 days and add charm. Charm raises every sale price.' },
+  { id: 'tree',     name: 'Tree',     key: '5', unlock: 3,  cost: 6,  desc: 'Trees take a while to grow up and add charm. Charm raises every sale price.' },
   { id: 'well',     name: 'Well',     key: '6', unlock: 5,  cost: 20, desc: 'Wheat within 2 tiles of a well grows 50% faster.' },
   { id: 'cottage',  name: 'Cottage',  key: '7', unlock: 6,  cost: 25, desc: 'A peasant family moves in. Villagers harvest ripe wheat and replant it for you.' },
   { id: 'windmill', name: 'Windmill', key: '8', unlock: 8,  cost: 60, desc: 'Grinds 6 wheat into 3 flour every morning. Flour sells for ' + PRICE.flour + ' coins.' },
@@ -362,6 +384,52 @@ const ROOFS = [
   { name: 'Azure',   col: '#3b6fd0', dark: '#2b53a3' },
   { name: 'Forest',  col: '#3f9a4a', dark: '#2f7538' },
   { name: 'Royal',   col: '#8a4fb8', dark: '#683a90' },
+];
+const UPGRADES = [
+  { id: 'plough',   branch: 'Farming', name: 'Iron plough',       desc: 'Wheat grows 25% faster.', cost: 40 },
+  { id: 'soil',     branch: 'Farming', name: 'Rich soil',         desc: 'Every harvest gives +1 wheat.', cost: 120, needs: ['plough'] },
+  { id: 'seeds',    branch: 'Farming', name: 'Royal seeds',       desc: 'Seeds are free, and villagers replant for nothing.', cost: 200 },
+  { id: 'rotation', branch: 'Farming', name: 'Crop rotation',     desc: 'Wheat grows another 25% faster.', cost: 400, needs: ['soil'] },
+  { id: 'golden',   branch: 'Farming', name: 'Golden plough',     desc: 'Wheat grows yet another 25% faster.', cost: 2500, needs: ['rotation'], home: 3 },
+  { id: 'boots',    branch: 'Farming', name: 'Swift boots',       desc: 'Villagers and knights walk 30% faster.', cost: 150 },
+  { id: 'mills',    branch: 'Farming', name: 'Great millstones',  desc: 'Windmills grind twice as much every morning.', cost: 250 },
+  { id: 'charter',  branch: 'Trade',   name: 'Trade charter',     desc: 'Everything sells for 15% more.', cost: 100 },
+  { id: 'guild',    branch: 'Trade',   name: 'Merchant guild',    desc: 'Shops, stalls and taverns sell 50% more items.', cost: 300, needs: ['charter'] },
+  { id: 'fleet',    branch: 'Trade',   name: 'Caravan wagons',    desc: 'Trade carts carry 50% more.', cost: 300 },
+  { id: 'ledger',   branch: 'Trade',   name: "Merchant's ledger", desc: 'Sell all and auto-sell pay 90% instead of 70%.', cost: 250 },
+  { id: 'royal',    branch: 'Trade',   name: 'Royal charter',     desc: 'Everything sells for 25% more again.', cost: 1200, needs: ['guild'], home: 3 },
+  { id: 'survey1',  branch: 'Realm',   name: 'Surveyors',         desc: 'New land costs 25% less.', cost: 80 },
+  { id: 'survey2',  branch: 'Realm',   name: 'Royal surveyors',   desc: 'New land costs another 25% less.', cost: 500, needs: ['survey1'] },
+  { id: 'roads',    branch: 'Realm',   name: 'Stone roads',       desc: 'Each path tile adds three times the charm.', cost: 120 },
+  { id: 'lanterns', branch: 'Realm',   name: 'Street lanterns',   desc: 'Adds 10 charm to your realm.', cost: 200 },
+  { id: 'banners',  branch: 'Realm',   name: 'Festival banners',  desc: 'Adds 25% more charm overall.', cost: 350, home: 2 },
+  { id: 'lenses',   branch: 'Realm',   name: 'Arcane lenses',     desc: 'Wizard towers reach one tile further.', cost: 600, home: 3 },
+  { id: 'lure',     branch: 'Realm',   name: 'Dragon lure',       desc: 'Dragons visit twice as often and drop double treasure.', cost: 400 },
+];
+const UP_BY_ID = Object.fromEntries(UPGRADES.map(u => [u.id, u]));
+const cntO = o => { let n = 0; for (const t of S.tiles) if (t && t.o === o) n++; return n; };
+const DECREES = [
+  { id: 'home',    text: 'Raise your home',                      goal: 1,     reward: 10,   cur: () => S.home.i >= 0 ? 1 : 0 },
+  { id: 'land5',   text: 'Claim 5 tiles',                        goal: 5,     reward: 15,   cur: () => S.owned },
+  { id: 'wheat30', text: 'Harvest 30 wheat',                     goal: 30,    reward: 20,   cur: () => S.harvested },
+  { id: 'road',    text: 'Lay 6 road tiles',                     goal: 6,     reward: 20,   cur: () => S.tiles.filter(t => t && t.g === 1).length },
+  { id: 'cottage', text: 'Build a cottage',                      goal: 1,     reward: 30,   cur: () => cntO(O.HOUSE) },
+  { id: 'land15',  text: 'Claim 15 tiles',                       goal: 15,    reward: 40,   cur: () => S.owned },
+  { id: 'mill',    text: 'Build a windmill',                     goal: 1,     reward: 50,   cur: () => cntO(O.MILL) },
+  { id: 'shop',    text: 'Open a shop',                          goal: 1,     reward: 60,   cur: () => cntO(O.SHOP) },
+  { id: 'upg1',    text: 'Buy your first upgrade',               goal: 1,     reward: 40,   cur: () => S.up.length },
+  { id: 'manor',   text: 'Upgrade your home to a Manor',         goal: 2,     reward: 150,  cur: () => homeLvl() },
+  { id: 'earn1k',  text: 'Earn 1,000 coins',                     goal: 1000,  reward: 100,  cur: () => S.earned },
+  { id: 'tavern',  text: 'Open a tavern',                        goal: 1,     reward: 120,  cur: () => cntO(O.TAVERN) },
+  { id: 'land40',  text: 'Grow into a Village (40 tiles)',       goal: 40,    reward: 200,  cur: () => S.owned },
+  { id: 'folk10',  text: 'Have 10 villagers',                    goal: 10,    reward: 200,  cur: () => S.vill.length },
+  { id: 'upg6',    text: 'Buy 6 upgrades',                       goal: 6,     reward: 250,  cur: () => S.up.length },
+  { id: 'keep',    text: 'Upgrade your home to a Keep',          goal: 3,     reward: 500,  cur: () => homeLvl() },
+  { id: 'tower',   text: 'Raise a wizard tower',                 goal: 1,     reward: 400,  cur: () => cntO(O.TOWER) },
+  { id: 'land90',  text: 'Grow into a City (90 tiles)',          goal: 90,    reward: 800,  cur: () => S.owned },
+  { id: 'earn25k', text: 'Earn 25,000 coins',                    goal: 25000, reward: 1500, cur: () => S.earned },
+  { id: 'castle',  text: 'Build your Castle',                    goal: 4,     reward: 3000, cur: () => homeLvl() },
+  { id: 'kingdom', text: 'Rule a Kingdom: a Castle and 120 tiles', goal: 1,   reward: 5000, cur: () => homeLvl() >= 4 && S.owned >= 120 ? 1 : 0 },
 ];
 const VILLAGE_NAMES = ['Oakhollow', 'Mistwood', 'Ravenmere', 'Thornwick', 'Brightwater', 'Elderglen', 'Stormhaven', 'Willowmere', 'Ironbrook', 'Amberfield', 'Duskwallow', 'Silverfen'];
 
@@ -968,7 +1036,15 @@ function sfx(name) {
 let S = null;
 let speed = 1, tool = 'hand', zoom = 3, W = 320, H = 200;
 const cam = { x: 0, y: 0 };
-const C = { mills: [], shops: [], stalls: [], carts: [], taverns: [], smiths: 0, houses: 0, charm: 0, mult: 1, boost: new Float32Array(N * N) };
+const defaultU = () => ({ growth: 1, yield: 0, freeSeeds: false, speed: 1, mill: 1, price: 1, cap: 1, cartCap: 1, sellRate: 0.7, land: 1, pathCharm: 0.15, charmMult: 1, lantern: 0, towerR: 3, dragon: 1 });
+function computeU() {
+  const has = id => S.up.includes(id);
+  return { growth: (has('plough') ? 1.25 : 1) * (has('rotation') ? 1.25 : 1) * (has('golden') ? 1.25 : 1), yield: has('soil') ? 1 : 0, freeSeeds: has('seeds'), speed: has('boots') ? 1.3 : 1, mill: has('mills') ? 2 : 1,
+    price: (has('charter') ? 1.15 : 1) * (has('royal') ? 1.25 : 1), cap: has('guild') ? 1.5 : 1, cartCap: has('fleet') ? 1.5 : 1, sellRate: has('ledger') ? 0.9 : 0.7,
+    land: (has('survey1') ? 0.75 : 1) * (has('survey2') ? 0.75 : 1), pathCharm: has('roads') ? 0.45 : 0.15, charmMult: has('banners') ? 1.25 : 1, lantern: has('lanterns') ? 10 : 0, towerR: has('lenses') ? 4 : 3, dragon: has('lure') ? 2 : 1 };
+}
+const C = { mills: [], shops: [], stalls: [], carts: [], taverns: [], smiths: 0, houses: 0, charm: 0, mult: 1, boost: new Float32Array(N * N), U: defaultU() };
+const seedCost = () => C.U.freeSeeds ? 0 : 1;
 const floats = [];
 let running = false, saveTimer = 0;
 
@@ -978,21 +1054,22 @@ function newTile(x, y) {
 }
 function mkVill(x, y, n, role = 'farmer') { return { x, y, n, role, path: [], task: null, target: -1, timer: 0.4, face: 1, anim: 0, st: 'idle' }; }
 function newState(opts = {}) {
-  const st = { v: 1, village: opts.village || VILLAGE_NAMES[(Math.random() * VILLAGE_NAMES.length) | 0], home: { i: -1, lvl: 1, roof: opts.roof | 0 }, day: 0, t: 0.1, coins: 14, wheat: 0, flour: 0, owned: 1, tiles: new Array(N * N).fill(null), vill: [], harvested: 0, earned: 0, auto: false, won: false, seen: 1 };
+  const st = { v: 1, village: opts.village || VILLAGE_NAMES[(Math.random() * VILLAGE_NAMES.length) | 0], home: { i: -1, lvl: 1, roof: opts.roof | 0 }, day: 0, t: 0.1, coins: 20, wheat: 0, flour: 0, owned: 1, tiles: new Array(N * N).fill(null), vill: [], harvested: 0, earned: 0, auto: false, won: false, seen: 1, up: [], decrees: [] };
   const t0 = newTile(START.x, START.y); t0.d = 1 | 4 | 8; st.tiles[idx(START.x, START.y)] = t0;
   st.vill.push(mkVill(START.x, START.y, 0));
   return st;
 }
-const landCost = () => Math.round(4 + 0.65 * Math.pow(S.owned, 1.3));
+const landCost = () => Math.max(1, Math.round((3 + 0.2 * Math.pow(S.owned, 1.2)) * C.U.land));
 
 function homeLvl() { return S.home && S.home.i >= 0 ? S.home.lvl : 0; }
-const yieldNow = () => YIELD + Math.min(2, C.smiths);
+const yieldNow = () => YIELD + Math.min(2, C.smiths) + C.U.yield;
 function recalc() {
+  C.U = computeU();
   C.mills = []; C.shops = []; C.stalls = []; C.carts = []; C.taverns = []; C.smiths = 0; C.houses = 0; C.boost.fill(0);
   let charm = 0; const wells = [], houses = [], towers = [];
   for (let i = 0; i < S.tiles.length; i++) {
     const t = S.tiles[i]; if (!t) continue;
-    if (t.g === 1) charm += 0.15;
+    if (t.g === 1) charm += C.U.pathCharm;
     if (CHARM[t.o]) charm += CHARM[t.o];
     switch (t.o) {
       case O.MILL: C.mills.push(i); break; case O.SHOP: C.shops.push(i); break; case O.STALL: C.stalls.push(i); break; case O.CART: C.carts.push(i); break;
@@ -1001,9 +1078,9 @@ function recalc() {
     }
   }
   const boostAround = (list, r, m) => { for (const w of list) { const wx = w % N, wy = (w / N) | 0; for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) if (inb(wx + dx, wy + dy)) { const k = idx(wx + dx, wy + dy); C.boost[k] = Math.max(C.boost[k], m); } } };
-  boostAround(wells, 2, 1.5); boostAround(towers, 3, 1.75);
+  boostAround(wells, 2, 1.5); boostAround(towers, C.U.towerR, 1.75);
   const hl = homeLvl(); if (hl) charm += HOME_LEVELS[hl - 1].charm;
-  C.charm = charm; C.mult = 1 + Math.min(charm, 200) / 200;
+  charm = charm * C.U.charmMult + C.U.lantern; C.charm = charm; C.mult = (1 + Math.min(charm, 200) / 200) * C.U.price;
   syncRole('farmer', 1 + C.houses + Math.max(0, hl - 1), houses);
   syncRole('knight', Math.max(0, hl - 2), []);
 }
@@ -1029,7 +1106,7 @@ function floatAt(i, text, color, coin) { const gx = i % N, gy = (i / N) | 0, [sx
 function harvest(i, byVill) {
   const t = S.tiles[i]; if (!t || t.o !== O.WHEAT || t.p < 1) return false;
   const y = yieldNow(); S.wheat += y; S.harvested += y;
-  if (byVill && S.coins >= 1) { S.coins -= 1; t.p = 0; } else t.p = -1;
+  if (byVill && S.coins >= seedCost()) { S.coins -= seedCost(); t.p = 0; } else t.p = -1;
   floatAt(i, '+' + y, '#ffe27a'); sfx('harvest'); return true;
 }
 function sellAll(rate, at) {
@@ -1067,9 +1144,9 @@ function act(tl, gx, gy) {
     }
     case 'wheat': {
       if (!t) return false;
-      if (t.o === O.WHEAT) { if (t.p >= 1) return harvest(i, false); if (t.p < 0) { if (!spend(1)) return fail('Seeds cost 1 coin.'); t.p = 0; sfx('plant'); return true; } return false; }
+      if (t.o === O.WHEAT) { if (t.p >= 1) return harvest(i, false); if (t.p < 0) { if (!spend(seedCost())) return fail('Seeds cost 1 coin.'); t.p = 0; sfx('plant'); return true; } return false; }
       if (t.o !== O.NONE || t.g === 1) return false;
-      if (!spend(1)) return fail('Seeds cost 1 coin.');
+      if (!spend(seedCost())) return fail('Seeds cost 1 coin.');
       t.o = O.WHEAT; t.p = 0; t.d = 0; sfx('plant'); return true;
     }
     case 'path': {
@@ -1113,20 +1190,18 @@ function dayTick() {
   S.day++;
   const prevSeason = seasonOf(S.day - 1), season = seasonOf(S.day);
   for (const i of C.mills) {
-    const k = Math.min(MILL_RATE, Math.floor(S.wheat / 2));
+    const k = Math.min(MILL_RATE * C.U.mill, Math.floor(S.wheat / 2));
     if (k > 0) { S.wheat -= 2 * k; S.flour += k; floatAt(i, '+' + k, '#f3ead2'); }
   }
   const sellers = [...C.carts, ...C.taverns, ...C.shops, ...C.stalls];
   for (const i of sellers) {
-    const def = SELLERS[S.tiles[i].o]; let cap = def.cap, money = 0;
+    const def = SELLERS[S.tiles[i].o]; let cap = Math.floor(def.cap * (S.tiles[i].o === O.CART ? C.U.cartCap : C.U.cap)), money = 0;
     const f = Math.min(cap, Math.floor(S.flour)); S.flour -= f; cap -= f; money += f * PRICE.flour * def.rate * C.mult;
     const w = Math.min(cap, Math.floor(S.wheat)); S.wheat -= w; money += w * PRICE.wheat * def.rate * C.mult;
     if (money > 0) { gain(money); floatAt(i, '+' + Math.round(money), '#ffd23f', true); sfx('coin'); }
   }
-  if (S.auto) { const w = Math.floor(S.wheat), f = Math.floor(S.flour); if (w + f > 0) { const g = (w * PRICE.wheat + f * PRICE.flour) * 0.7 * C.mult; S.wheat -= w; S.flour -= f; gain(g); } }
-  if (season !== prevSeason) toast(SEASONS[season] + (season === 0 ? ', year ' + (Math.floor(S.day / (SEASON_LEN * 4)) + 1) : ' begins'));
-  else if ([100, 250, 500, 750, 900, 990].includes(S.day)) toast('Day ' + S.day + '. ' + (GOAL_DAYS - S.day) + ' to go.');
-  if (S.day >= GOAL_DAYS && !S.won) { S.won = true; showFinale(); }
+  if (S.auto) { const w = Math.floor(S.wheat), f = Math.floor(S.flour); if (w + f > 0) { const g = (w * PRICE.wheat + f * PRICE.flour) * C.U.sellRate * C.mult; S.wheat -= w; S.flour -= f; gain(g); } }
+  if (season !== prevSeason) toast(SEASONS[season] + ' begins');
 }
 
 /* ---------- simulation ---------- */
@@ -1162,7 +1237,7 @@ function stepVill(v, h) {
     if (!v.path.length) { arrive(v); return; }
     const nxt = v.path[0], nx = nxt % N, ny = (nxt / N) | 0;
     if (!walkable(nxt)) { v.path = []; v.st = 'idle'; v.timer = 0.2; v.target = -1; return; }
-    const dx = nx - v.x, dy = ny - v.y, dist = Math.hypot(dx, dy), step = 2.4 * h;
+    const dx = nx - v.x, dy = ny - v.y, dist = Math.hypot(dx, dy), step = 2.4 * C.U.speed * h;
     if (dx - dy > 0.01) v.face = 1; else if (dx - dy < -0.01) v.face = -1;
     v.anim += h * 9;
     if (dist <= step) { v.x = nx; v.y = ny; v.path.shift(); if (!v.path.length) arrive(v); }
@@ -1182,7 +1257,7 @@ function step(h) {
   const dp = h / DAY_SECONDS / GROW_DAYS, tp = h / DAY_SECONDS / TREE_DAYS;
   for (let i = 0; i < S.tiles.length; i++) {
     const t = S.tiles[i]; if (!t) continue;
-    if (t.o === O.WHEAT && t.p >= 0 && t.p < 1) t.p = Math.min(1, t.p + dp * (C.boost[i] || 1));
+    if (t.o === O.WHEAT && t.p >= 0 && t.p < 1) t.p = Math.min(1, t.p + dp * (C.boost[i] || 1) * C.U.growth);
     else if (t.o === O.TREE && t.p < 1) t.p = Math.min(1, t.p + tp);
   }
   for (const v of S.vill) stepVill(v, h);
@@ -1496,7 +1571,7 @@ function selectTool(id) {
   for (const t of TOOLS) $('#tool-' + t.id).setAttribute('aria-pressed', String(t.id === id));
   cv.style.cursor = id === 'hand' ? 'grab' : 'crosshair';
 }
-function costOf(t) { return t.id === 'land' ? landCost() : t.cost; }
+function costOf(t) { return t.id === 'land' ? landCost() : t.id === 'wheat' ? seedCost() : t.cost; }
 function refreshToolbar() {
   for (const t of TOOLS) {
     const b = $('#tool-' + t.id), locked = isLocked(t), c = costOf(t), cs = b.querySelector('.cs'), built = t.id === 'home' && S.home.i >= 0;
@@ -1510,27 +1585,27 @@ function tutorialText() {
   if (S.owned === 1) return 'Pick <b>Land</b>, then click a glowing tile beside your home to claim it.';
   const hasWheat = S.tiles.some(t => t && t.o === O.WHEAT);
   if (!hasWheat && S.harvested === 0) return 'Pick <b>Wheat</b> and click your grass to plant seeds. They cost 1 coin.';
-  if (S.harvested === 0) return 'Wheat ripens in 4 days. Try the <b>3x</b> button to pass time faster.';
+  if (S.harvested === 0) return 'Wheat takes a little while to ripen. Try the <b>3x</b> button to pass time faster.';
   if (S.owned < 5 && S.wheat >= 1) return 'Press <b>Sell all</b> to turn wheat into coins, then buy more land.';
   return '';
 }
-function rankName() { const n = S.owned; return homeLvl() >= 4 && n >= 90 ? 'Kingdom' : n < 15 ? 'Hamlet' : n < 40 ? 'Village' : n < 90 ? 'Town' : 'City'; }
+function rankName() { const n = S.owned; return homeLvl() >= 4 && n >= 120 ? 'Kingdom' : n < 15 ? 'Hamlet' : n < 40 ? 'Village' : n < 90 ? 'Town' : 'City'; }
+function nextDecree() { return DECREES.find(d => !S.decrees.includes(d.id)); }
 function nextGoalText() {
-  const parts = [];
-  if (S.home.i < 0) parts.push('Raise your <b>Home</b> on a tile');
-  else if (S.home.lvl < 4) { const n = HOME_LEVELS[S.home.lvl]; parts.push(`Next home: <b>${n.name}</b> (${n.tiles} tiles, ${n.cost} coins)`); }
-  const nxt = TOOLS.filter(t => t.unlock > S.owned).sort((a, b) => a.unlock - b.unlock)[0];
-  if (nxt) parts.push(`Next tool: <b>${nxt.name}</b> at ${nxt.unlock} tiles`);
-  return parts.length ? parts.join('<br>') : S.day >= GOAL_DAYS ? 'Everything unlocked. Build freely.' : 'Everything unlocked. Grow your realm.';
+  const parts = [], d = nextDecree();
+  if (d) parts.push(`Decree: <b>${d.text}</b> (${fmt(Math.min(d.cur(), d.goal))} / ${fmt(d.goal)})`);
+  if (S.home.i >= 0 && S.home.lvl < 4) { const n = HOME_LEVELS[S.home.lvl]; parts.push(`Next home: <b>${n.name}</b> (${n.tiles} tiles, ${n.cost} coins)`); }
+  return parts.length ? parts.join('<br>') : 'Every decree is fulfilled. Build as you please.';
 }
 function updateHud(L) {
-  setText('#day-num', String(S.day));
-  $('#goal-fill').style.width = Math.min(100, S.day / GOAL_DAYS * 100) + '%';
-  const season = seasonOf(S.day), year = Math.floor(S.day / (SEASON_LEN * 4)) + 1;
-  setText('#season', `${SEASONS[season]}, year ${year} · ${timeName(L.hour)}`);
+  const season = seasonOf(S.day), done = S.decrees.length;
+  $('#goal-fill').style.width = done / DECREES.length * 100 + '%'; setText('#goal-txt', done + ' / ' + DECREES.length);
+  setText('#season', `${SEASONS[season]} \u00b7 ${timeName(L.hour)}`);
   const dot = $('#clock-dot'); dot.style.background = L.night > 0.5 ? '#8fa0ff' : L.hour < 8 || L.hour >= 17 ? '#ff9b5e' : '#ffd23f';
+  const pct = Math.round(C.U.sellRate * 100); if (hudCache.pct !== pct) { hudCache.pct = pct; $('#btn-sell').title = 'Sell all wheat and flour at ' + pct + '% price'; $('#auto-lbl').title = 'Sell leftovers at ' + pct + '% price every morning'; }
+  const av = availableUpgrades(); setText('#up-badge', String(av)); $('#up-badge').hidden = av === 0;
   setText('#v-coins', fmt(S.coins)); setText('#v-wheat', fmt(S.wheat)); setText('#v-flour', fmt(S.flour)); setText('#v-charm', String(Math.round(C.charm)));
-  setText('#v-mult', '+' + Math.round((C.mult - 1) * 100) + '%'); setText('#village-rank', rankName()); setText('#village-name', S.village);
+  setText('#v-mult', '+' + Math.round((C.mult - 1) * 100) + '%'); setText('#village-rank', rankName().toUpperCase()); setText('#village-name', S.village);
   const ng = nextGoalText(); if (hudCache.ng !== ng) { hudCache.ng = ng; $('#next-goal').innerHTML = ng; }
   const tt = hoverTool ? `<b>${hoverTool.name}.</b> ${hoverTool.desc}` : (tutorialText() || `<b>${TOOL_BY_ID[tool].name}.</b> ${TOOL_BY_ID[tool].desc}`);
   if (hudCache.hint !== tt) { hudCache.hint = tt; hint.innerHTML = tt; }
@@ -1562,7 +1637,7 @@ function updateTip(hover) {
 function statRow(k, v) { return `<div><span>${k}</span><b>${v}</b></div>`; }
 function showFinale() {
   $('#fin-stats').innerHTML = statRow('Land', S.owned + ' tiles') + statRow('Villagers', S.vill.filter(v => v.role !== 'knight').length) + statRow('Wheat harvested', fmt(S.harvested)) + statRow('Coins earned', fmt(S.earned)) + statRow('Charm', Math.round(C.charm)) + statRow('Home', HOME_LEVELS[S.home.lvl - 1].name) + statRow('Buildings', S.tiles.filter(t => t && SOLID.has(t.o) && t.o !== O.TREE).length);
-  $('#fin-text').textContent = 'After 1000 days, ' + S.village + ' stands as a ' + rankName().toLowerCase() + '. Here is how it looks.';
+  $('#fin-text').textContent = S.village + ' is a kingdom now. Here is how it looks.';
   $('#finale').hidden = false; running = false; sfx('unlock');
 }
 function setSpeed(v) {
@@ -1571,9 +1646,52 @@ function setSpeed(v) {
 
 
 /* ---------- home panel ---------- */
-let panelWasRunning = false;
-function openHome() { if (S.home.i < 0) return; panelWasRunning = running; running = false; $('#home-panel').hidden = false; renderHome(true); sfx('click'); }
-function closeHome() { $('#home-panel').hidden = true; if (panelWasRunning) running = true; }
+let panelWasRunning = false, panelOpen = false;
+function pausePanel() { if (!panelOpen) { panelWasRunning = running; running = false; panelOpen = true; } }
+function resumePanel() { if (panelOpen) { running = panelWasRunning; panelOpen = false; } }
+function openHome() { if (S.home.i < 0) return; pausePanel(); $('#home-panel').hidden = false; renderHome(true); sfx('click'); }
+function closeHome() { $('#home-panel').hidden = true; resumePanel(); }
+
+/* ---------- upgrades ---------- */
+function upReason(u) {
+  for (const n of u.needs || []) if (!S.up.includes(n)) return 'Needs ' + UP_BY_ID[n].name;
+  if (u.home && homeLvl() < u.home) return 'Needs a ' + HOME_LEVELS[u.home - 1].name;
+  return '';
+}
+function availableUpgrades() { let n = 0; for (const u of UPGRADES) if (!S.up.includes(u.id) && !upReason(u) && S.coins + 1e-6 >= u.cost) n++; return n; }
+function buyUpgrade(id) {
+  const u = UP_BY_ID[id]; if (!u || S.up.includes(id)) return;
+  const why = upReason(u); if (why) return fail(why);
+  if (!spend(u.cost)) return fail('You need ' + u.cost + ' coins for ' + u.name + '.');
+  S.up.push(id); recalc(); sfx('unlock'); toast('Upgrade bought: ' + u.name); renderUpgrades();
+}
+function renderUpgrades() {
+  $('#up-coins').textContent = 'You have ' + fmt(S.coins) + ' coins';
+  const grid = $('#up-grid'); grid.innerHTML = '';
+  for (const branch of ['Farming', 'Trade', 'Realm']) {
+    const sec = document.createElement('div'); sec.innerHTML = `<h2 class="upbranch">${branch}</h2><div class="upcards"></div>`; const box = sec.querySelector('.upcards');
+    for (const u of UPGRADES.filter(x => x.branch === branch)) {
+      const owned = S.up.includes(u.id), why = owned ? '' : upReason(u), poor = !owned && !why && S.coins + 1e-6 < u.cost;
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'upc' + (owned ? ' owned' : why ? ' locked' : poor ? ' poor' : '');
+      b.innerHTML = `<b>${u.name}</b><span class="d">${u.desc}</span><span class="f">${owned ? 'Owned' : why ? why : '<i></i>' + fmt(u.cost)}</span>`;
+      if (owned) b.disabled = true; else b.addEventListener('click', () => buyUpgrade(u.id));
+      box.appendChild(b);
+    }
+    grid.appendChild(sec);
+  }
+}
+function openUpgrades() { pausePanel(); $('#up-panel').hidden = false; renderUpgrades(); sfx('click'); }
+function closeUpgrades() { $('#up-panel').hidden = true; resumePanel(); }
+
+/* ---------- decrees ---------- */
+let decreeTimer = 0;
+function checkDecrees() {
+  for (const d of DECREES) {
+    if (S.decrees.includes(d.id) || d.cur() < d.goal) continue;
+    S.decrees.push(d.id); S.coins += d.reward; toast('Decree fulfilled: ' + d.text + '. +' + d.reward + ' coins'); sfx('unlock');
+    if (d.id === 'kingdom' && !S.won) { S.won = true; showFinale(); }
+  }
+}
 function buildSwatches(box, get, set) {
   box.innerHTML = '';
   ROOFS.forEach((r, i) => {
@@ -1616,7 +1734,7 @@ function updateDragon(dt) {
     return;
   }
   dragon.t += dt; dragon.x += dragon.vx * dt; dragon.y += Math.sin(dragon.t * 2) * 9 * dt; if (dragon.caught) dragon.y -= 45 * dt;
-  if (dragon.x < -40 || dragon.x > W + 40 || dragon.y < -20) { dragon.on = false; dragon.next = 60 + Math.random() * 90; }
+  if (dragon.x < -40 || dragon.x > W + 40 || dragon.y < -20) { dragon.on = false; dragon.next = (60 + Math.random() * 90) / C.U.dragon; }
 }
 function drawDragon(time) {
   if (!dragon.on) return;
@@ -1626,7 +1744,7 @@ function drawDragon(time) {
 }
 function tryCatchDragon(lx, ly) {
   if (!dragon.on || dragon.caught || Math.abs(lx - dragon.x) > 15 || Math.abs(ly - dragon.y) > 10) return false;
-  const reward = Math.round(30 + S.owned * 4); gain(reward); dragon.caught = true; sfx('coin'); toast('The dragon dropped ' + reward + ' coins of treasure.'); return true;
+  const reward = Math.round((30 + S.owned * 4) * C.U.dragon); gain(reward); dragon.caught = true; sfx('coin'); toast('The dragon dropped ' + reward + ' coins of treasure.'); return true;
 }
 
 /* ================================================================
@@ -1673,11 +1791,13 @@ addEventListener('keydown', e => {
   if (e.target && (e.target.tagName === 'INPUT')) return;
   const k = e.key.toLowerCase();
   if (k === 'escape' && !$('#home-panel').hidden) { closeHome(); return; }
+  if ((k === 'escape' || k === 'u') && !$('#up-panel').hidden) { closeUpgrades(); return; }
   if (!running) return;
   if (k === ' ') { e.preventDefault(); setSpeed(speed === 0 ? 1 : 0); return; }
   if (k === 'm') { toggleMute(); return; }
   if (k === '+' || k === '=') { setZoom(zoom + 1); return; }
   if (k === '-' || k === '_') { setZoom(zoom - 1); return; }
+  if (k === 'u') { openUpgrades(); return; }
   if (k === 'escape') { selectTool('hand'); return; }
   const t = TOOLS.find(t => t.key === k); if (t) { selectTool(t.id); return; }
   if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(k)) { held.add(k); e.preventDefault(); }
@@ -1696,10 +1816,10 @@ function moveCam(dt) {
    ================================================================ */
 function serialize() {
   const tiles = []; S.tiles.forEach((t, i) => { if (t) tiles.push([i, t.g, t.o, Math.round(t.p * 1000) / 1000, t.d]); });
-  return { v: 1, day: S.day, t: S.t, coins: S.coins, wheat: S.wheat, flour: S.flour, owned: S.owned, harvested: S.harvested, earned: S.earned, auto: S.auto, won: S.won, seen: S.seen, tiles, vill: S.vill.map(v => [v.x, v.y, v.n, v.role]), village: S.village, home: S.home, cam: [cam.x, cam.y], zoom };
+  return { v: 1, day: S.day, t: S.t, coins: S.coins, wheat: S.wheat, flour: S.flour, owned: S.owned, harvested: S.harvested, earned: S.earned, auto: S.auto, won: S.won, seen: S.seen, up: S.up, decrees: S.decrees, tiles, vill: S.vill.map(v => [v.x, v.y, v.n, v.role]), village: S.village, home: S.home, cam: [cam.x, cam.y], zoom };
 }
 function deserialize(d) {
-  const st = { v: 1, day: d.day | 0, t: +d.t || 0, coins: +d.coins || 0, wheat: +d.wheat || 0, flour: +d.flour || 0, owned: 0, tiles: new Array(N * N).fill(null), vill: [], harvested: d.harvested | 0, earned: +d.earned || 0, auto: !!d.auto, won: !!d.won, seen: d.seen | 1 };
+  const st = { v: 1, day: d.day | 0, t: +d.t || 0, coins: +d.coins || 0, wheat: +d.wheat || 0, flour: +d.flour || 0, owned: 0, tiles: new Array(N * N).fill(null), vill: [], harvested: d.harvested | 0, earned: +d.earned || 0, auto: !!d.auto, won: !!d.won, seen: d.seen | 1, up: Array.isArray(d.up) ? d.up.filter(id => UP_BY_ID[id]) : [], decrees: Array.isArray(d.decrees) ? d.decrees.filter(x => typeof x === 'string') : [] };
   for (const [i, g, o, p, dd] of d.tiles) { if (i >= 0 && i < N * N) { st.tiles[i] = { g, o, p, d: dd }; st.owned++; } }
   for (const [x, y, n, role] of d.vill || []) st.vill.push(mkVill(x, y, n, role || 'farmer'));
   st.village = String(d.village || VILLAGE_NAMES[0]).slice(0, 20);
@@ -1719,7 +1839,7 @@ function startGame(data, opts) {
   const defZoom = defaultZoom();
   zoom = data && data.zoom ? clamp(data.zoom | 0, 2, 6) : defZoom; resize();
   if (data && data.cam) { cam.x = data.cam[0]; cam.y = data.cam[1]; } else centerOn(START.x, START.y);
-  recalc(); S.unl = new Set(unlockedIds()); floats.length = 0; hudCache.ng = hudCache.hint = null; dragon.on = false; dragon.next = 35;
+  recalc(); if (data && !Array.isArray(data.decrees)) S.decrees = DECREES.filter(d => d.cur() >= d.goal).map(d => d.id); S.unl = new Set(unlockedIds()); floats.length = 0; hudCache.ng = hudCache.hint = null; dragon.on = false; dragon.next = 35;
   $('#auto').checked = S.auto; selectTool('hand'); refreshToolbar();
   $('#intro').hidden = true; $('#finale').hidden = true; running = true; setSpeed(1);
   if (!data) selectTool('home');
@@ -1744,6 +1864,7 @@ function frame(ts) {
   if (S) {
     if (running && speed > 0) simulate(dt * speed);
     moveCam(dt); if (!reduceMotion) updateDragon(dt);
+    if (running) { decreeTimer += dt; if (decreeTimer > 0.5) { decreeTimer = 0; checkDecrees(); } }
     draw(dt, ts / 1000);
     updateHud(lightState());
     saveTimer += dt; if (saveTimer > 5 && running) { saveTimer = 0; save(); }
@@ -1764,6 +1885,8 @@ function init() {
   $('#btn-play').addEventListener('click', () => { wipeSave(); audio(); startGame(null, { village: nameIn.value.trim().slice(0, 20) || VILLAGE_NAMES[0], roof: chosenRoof }); });
   $('#village-btn').addEventListener('click', () => { if (!running) return; if (S.home.i < 0) { toast('Raise your home first. Pick the Home tool.'); sfx('err'); } else openHome(); });
   $('#hp-close').addEventListener('click', closeHome);
+  $('#btn-up').addEventListener('click', () => { if (running) openUpgrades(); });
+  $('#up-close').addEventListener('click', closeUpgrades);
   $('#hp-up').addEventListener('click', () => { if (upgradeHome()) renderHome(false); });
   $('#hp-name').addEventListener('input', e => { S.village = e.target.value.slice(0, 20) || S.village; $('#hp-rank').textContent = rankName() + ' of ' + S.village; });
   $('#hp-name').addEventListener('keydown', e => { if (e.key === 'Enter') e.target.blur(); });
@@ -1773,7 +1896,7 @@ function init() {
   $('#btn-restart').addEventListener('click', () => { const v = S.village, r = S.home.roof; wipeSave(); startGame(null, { village: v, roof: r }); });
   $('#btn-help').addEventListener('click', () => { if (!running) return; running = false; introMode = 'pause'; $('#intro-form').hidden = true; $('#btn-play').hidden = true; $('#btn-new').hidden = true; const c = $('#btn-continue'); c.hidden = false; c.textContent = 'Back to the village'; $('#intro').hidden = false; save(); });
   document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('button'); if (b && e.detail > 0) b.blur(); });
-  $('#btn-sell').addEventListener('click', () => { if (!running) return; sellAll(0.7, idx(START.x, START.y)); });
+  $('#btn-sell').addEventListener('click', () => { if (!running) return; sellAll(C.U.sellRate, idx(START.x, START.y)); });
   $('#auto').addEventListener('change', e => { S.auto = e.target.checked; });
   for (const s of SPEEDS) $('#spd-' + s).addEventListener('click', () => { setSpeed(s); sfx('click'); });
   $('#btn-zoom-in').addEventListener('click', () => setZoom(zoom + 1)); $('#btn-zoom-out').addEventListener('click', () => setZoom(zoom - 1));
