@@ -2,11 +2,37 @@
 
 A cozy isometric farming-village game that runs in the browser. It is based on the "0 days to 1000 days" idea: you start with a single grass block and one small hooded farmer, and grow it into a village over 1000 in-game days.
 
-Everything is one file (`index.html`) with no build step and no image assets. All the pixel art is drawn from code at startup.
+The game itself is one file (`www/index.html`) with no build step and no image assets. All the pixel art is drawn from code at startup, and the two pixel fonts are bundled in `www/fonts`, so it works offline.
 
-## Play
+It is wrapped as a phone app with [Capacitor](https://capacitorjs.com), so the same code ships as an Android app and an iOS app. Progress saves automatically on the device.
 
-Open `index.html` in a browser. Progress saves automatically in the browser (localStorage).
+## Play in a browser
+
+Open `www/index.html` directly, or run `npm install && npm run serve` and visit http://localhost:8080.
+
+## Build the phone app
+
+You need Node 18+ and `npm install` once.
+
+**Android** (Android Studio, or the Android SDK plus JDK 17+):
+
+```sh
+npm run android        # syncs the game into android/ and opens Android Studio
+```
+
+Then press Run for a device or emulator, or use *Build > Build Bundle(s) / APK(s)*. From a terminal, `cd android && ./gradlew assembleDebug` writes `app/build/outputs/apk/debug/app-debug.apk`.
+
+**iOS** (a Mac with Xcode):
+
+```sh
+npm run ios            # syncs the game into ios/ and opens Xcode
+```
+
+Pick a team under *Signing & Capabilities*, then Run.
+
+After editing `www/index.html`, run `npm run sync` to copy it into both native projects. The app id is `com.ofek.onetilevillage` (change it in `capacitor.config.json` before publishing). Icons and splash screens come from `assets/` via `npx capacitor-assets generate`.
+
+Note: I could not compile the Android or iOS builds in the sandbox where this was written (no Android SDK or Xcode), so the first native build on your machine is the first real test.
 
 ## How it works
 

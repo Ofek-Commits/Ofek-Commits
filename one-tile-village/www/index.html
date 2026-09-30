@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0d0e14">
 <title>One Tile Village</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Silkscreen:wght@400;700&display=swap">
 <style>
+@font-face { font-family: 'Pixelify Sans'; font-weight: 400; font-style: normal; font-display: swap; src: url('fonts/pixelify-sans-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Pixelify Sans'; font-weight: 600; font-style: normal; font-display: swap; src: url('fonts/pixelify-sans-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Pixelify Sans'; font-weight: 700; font-style: normal; font-display: swap; src: url('fonts/pixelify-sans-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Silkscreen'; font-weight: 400; font-style: normal; font-display: swap; src: url('fonts/silkscreen-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Silkscreen'; font-weight: 700; font-style: normal; font-display: swap; src: url('fonts/silkscreen-latin-700-normal.woff2') format('woff2'); }
 /* Layout: one full-bleed pixel canvas for the world, HUD panels docked to the top edge, a tool shelf docked to the bottom. */
 :root {
   --bg: #0d0e14;
@@ -32,6 +37,8 @@ body {
   font-family: var(--font-ui);
   font-size: 15px;
   overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
   user-select: none;
 }
